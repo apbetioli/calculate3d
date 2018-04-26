@@ -1,7 +1,14 @@
+## Install
+
+Install the dependencies. You need to have yarn preinstalled.
+
+```
+yarn
+```
 
 ## Running
 
-This will start webpack dev server on localhost:8080
+Start webpack dev server on localhost:8080
 
 ```
 yarn dev
@@ -10,7 +17,7 @@ yarn dev
 
 ## Build for production
 
-This will build the bundle.js for production
+Build the bundle.js for production
 
 ```
 yarn prod

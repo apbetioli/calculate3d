@@ -1,4 +1,4 @@
-class Parameters {
+export class Parameters {
     constructor() {
         this.inputs = document.querySelectorAll("#parameters input");
         this.storeOnChange();

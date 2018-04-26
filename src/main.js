@@ -1,5 +1,5 @@
 import Parameters from './parameters';
-import Print from './print';
+import Print, {Input, Text} from './print';
 
 class App {
     constructor() {
@@ -17,7 +17,21 @@ class App {
     }
 
     addPrint() {
-        this.prints.push(new Print("baby groot"));
+        let print = new Print();
+        print.addField(new Text("name", "baby groot"));
+        print.addField(new Input("weight", "30"));
+        print.addField(new Input("filament_cost", "30"));
+        print.addField(new Input("time", "30"));
+        print.addField(new Text("energy_cost", "30"));
+        print.addField(new Input("additional_cost", "30"));
+        print.addField(new Text("failure_margin", "30"));
+        print.addField(new Text("total_cost", "300"));
+        print.addField(new Text("roi", "30"));
+        print.addField(new Text("profit", "30"));
+        print.addField(new Text("sell_price", "30"));
+        print.addField(new Text("final_price", "30"));
+
+        this.prints.push(print);
         this.render();
     }
 
