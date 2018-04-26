@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Calculate 3D</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculate 3D</h1>
+
+        <h2>Parameters</h2>
+
+        <div id="parameters">
+
+            <h3>Costs</h3>
+
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th>Filament cost per kg ($)</th>
+                    <th>Power rating (watts)</th>
+                    <th>Cost of energy (kW/h)</th>
+                    <th>Fail average (%)</th>
+                    <th>Additional cost per print ($)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="number" id="filament_cost" class="form-control" min="0" value="130" required="required"></td>
+                    <td><input type="number" id="power_rating" class="form-control" min="0" value="800" required="required"></td>
+                    <td><input type="number" id="cost_of_energy" class="form-control" value="0.71" required="required" step="0.01"></td>
+                    <td><input type="number" id="fail_average" class="form-control" min="0" max="100" value="25" required="required"></td>
+                    <td><input type="number" id="additional_cost" class="form-control" min="0" step="0.1" value="0.2" required="required"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3>ROI</h3>
+
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th>Investment ($)</th>
+                    <th>Desired time (months)</th>
+                    <th>Work hours a day (h)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="number" id="investment" class="form-control" min="0" value="5000" required="required"></td>
+                    <td><input type="number" id="desired_time" class="form-control" min="0" value="12" required="required"></td>
+                    <td><input type="number" id="work_hours" class="form-control" min="0" value="12" required="required"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h3>Other</h3>
+
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th>Markup (%)</th>
+                    <th>Transaction fee (%)</th>
+                    <th>Finishing (%)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="number" id="markup" class="form-control" min="0" max="100" value="100" required="required"></td>
+                    <td><input type="number" id="transaction_fee" class="form-control" min="0" max="100" value="4" required="required"></td>
+                    <td><input type="number" id="finishing" class="form-control" min="0" max="100" value="0" required="required"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Prints</h2>
+
+        <button id="addButton" class="btn btn-primary">Add</button>
+
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th class="align-right">Volume (cm3)</th>
+                    <th class="align-right">Weight (g)</th>
+                    <th class="align-right">Filament Cost ($)</th>
+                    <th class="align-right">Time (h)</th>
+                    <th class="align-right">Energy Cost ($)</th>
+                    <th class="align-right">Additional Cost ($)</th>
+                    <th class="align-right">Failure Margin ($)</th>
+                    <th class="align-right">Total Cost ($)</th>
+                    <th class="align-right">ROI ($)</th>
+                    <th class="align-right">Profit ($)</th>
+                    <th class="align-right">Sell price ($)</th>
+                    <th class="align-right">Final price ($)</th>
+                </tr>
+            </thead>
+            <tbody id="prints_body">
+                <tr>
+                    <td><input id="name_0" type="text"class="form-control" ></td>
+                    <td class="align-right"><input id="volume_0" type="number" class="form-control"></td>
+                    <td class="align-right"><input id="weight_0" type="number" class="form-control"></td>
+                    <td class="align-right"><input id="filament_cost_0" type="number" class="form-control" step="0.01" ></td>
+                    <td class="align-right"><input id="time_0" type="number" class="form-control" step="0.1"></td>
+                    <td class="align-right"><input id="energy_cost_0" type="number" class="form-control" step="0.01"></td>
+                    <td class="align-right"><input id="additional_cost_0" type="number" class="form-control" step="0.01"></td>
+                    <td class="align-right"><input id="failure_margin_0" type="number" class="form-control" min="0" max="100"></td>
+                    <td class="align-right"><input id="total_cost_0" type="number" class="form-control" step="0.01"></td>
+                    <td class="align-right"><input id="roi_0" type="number" class="form-control" step="0.01"></td>
+                    <td class="align-right"><input id="profit_0" type="number" class="form-control" step="0.01"></td>
+                    <td class="align-right"><input id="sell_price_0" type="number" class="form-control" step="0.01"></td>
+                    <td class="align-right"><input id="final_price_0" type="number" class="form-control" step="0.01"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="./bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>    
+</body>
+</html>
