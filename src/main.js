@@ -4,7 +4,7 @@ import Print, {Input, Text} from './print';
 class App {
     constructor() {
         this.parameters = new Parameters();
-        this.parameters.load();
+        this.parameters.addOnChangeListeners(() => this.render());
 
         this.prints = [];
 
@@ -13,34 +13,52 @@ class App {
     }
 
     bindUI() {
-        document.getElementById('addButton').onclick = () => this.addPrint();
+        this.printsTable = document.getElementById('prints_table');
+        this.printsTable.style.display = 'none';
+
+        this.printsBody = document.getElementById('prints_body');
+
+        this.fileInput = document.getElementById('file');
+        this.fileInput.onchange = (e) => this.readFiles(e.target.files);
+    }
+    
+    readFiles(files) {
+        Object.values(files).forEach((file) => {
+            var reader = new FileReader();
+            reader.onload = () => this.parseGCode(file, reader.result);
+            reader.readAsText(file);	
+        });
     }
 
-    addPrint() {
-        let print = new Print();
-        print.addField(new Text("name", "baby groot"));
-        print.addField(new Input("weight", "30"));
-        print.addField(new Input("filament_cost", "30"));
-        print.addField(new Input("time", "30"));
-        print.addField(new Text("energy_cost", "30"));
-        print.addField(new Input("additional_cost", "30"));
-        print.addField(new Text("failure_margin", "30"));
-        print.addField(new Text("total_cost", "300"));
-        print.addField(new Text("roi", "30"));
-        print.addField(new Text("profit", "30"));
-        print.addField(new Text("sell_price", "30"));
-        print.addField(new Text("final_price", "30"));
+    parseGCode(file, gcode) {
+        let print = new Print(file.name);
+
+        //TODO
+        print.weight = 200;
+        print.time = 60;
 
         this.prints.push(print);
         this.render();
     }
 
     render() {
-        let prints_body = document.getElementById("prints_body");
-        prints_body.innerHTML = "";
+        if(this.prints.length == 0)
+            return;
 
+        this.printsTable.style.display = 'block';
+
+        this.printsBody.innerHTML = "";
         this.prints.forEach(print => {
-            prints_body.appendChild(print.render());
+
+            print.filamentCost = print.weight * this.parameters.getValue('filament_cost') / 1000;
+            print.energyCost = print.time * this.parameters.getValue('power_rating') * this.parameters.getValue('energy_cost') / (60 * 1000);
+            print.additionalCost = parseFloat(this.parameters.getValue('additional_cost'));
+            print.totalCost = print.filamentCost + print.energyCost + print.additionalCost;
+            print.failureMargin = print.totalCost * this.parameters.getValue('failure_margin') / 100;
+            print.markup = print.totalCost * this.parameters.getValue('markup') / 100;
+            print.sellPrice = print.totalCost + print.failureMargin + print.markup;
+
+            this.printsBody.appendChild(print.render());
         });
     }
 
