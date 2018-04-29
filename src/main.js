@@ -1,5 +1,6 @@
 import Parameters from './parameters';
 import Print, {Input, Text} from './print';
+import GCode from './gcode';
 
 class App {
     constructor() {
@@ -28,14 +29,17 @@ class App {
             reader.onload = () => this.parseGCode(file, reader.result);
             reader.readAsText(file);	
         });
+
+        this.fileInput.value = '';
     }
 
-    parseGCode(file, gcode) {
+    parseGCode(file, content) {
         let print = new Print(file.name);
 
-        //TODO
-        print.weight = 200;
-        print.time = 60;
+        let gcode = new GCode(content);
+        print.weight = gcode.weight;
+        print.time = parseInt(gcode.time);
+        print.formattedTime = gcode.formattedTime;
 
         this.prints.push(print);
         this.render();
@@ -46,8 +50,12 @@ class App {
             return;
 
         this.printsTable.style.display = 'block';
-
         this.printsBody.innerHTML = "";
+
+        let total = new Print('TOTAL');
+
+        let roi = this.calculateROI();
+
         this.prints.forEach(print => {
 
             print.filamentCost = print.weight * this.parameters.getValue('filament_cost') / 1000;
@@ -56,10 +64,19 @@ class App {
             print.totalCost = print.filamentCost + print.energyCost + print.additionalCost;
             print.failureMargin = print.totalCost * this.parameters.getValue('failure_margin') / 100;
             print.markup = print.totalCost * this.parameters.getValue('markup') / 100;
-            print.sellPrice = print.totalCost + print.failureMargin + print.markup;
+            print.roi = print.time * roi;
+            print.sellPrice = print.totalCost + print.failureMargin + print.roi + print.markup;
+
+            total.add(print);
 
             this.printsBody.appendChild(print.render());
         });
+
+        this.printsBody.appendChild(total.render());
+    }
+
+    calculateROI() {
+        return this.parameters.getValue('investment') / this.parameters.getValue('desired_time') / 30 / this.parameters.getValue('work_hours') / 60;
     }
 
 }

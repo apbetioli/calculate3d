@@ -13,7 +13,7 @@
 
         <div id="parameters">
 
-            <h3>Parameters</h3>
+            <h3>3D Calculator Tabajara</h3>
 
             <!-- <p><button id="slicerConfigButton" class="btn btn-primary">Slicer configs</button></p> -->
             
@@ -25,7 +25,6 @@
                     <th>Filament cost per kg ($)</th>
                     <th>Power rating (watts)</th>
                     <th>Energy cost (kW/h)</th>
-                    <th>Failure margin (%)</th>
                     <th>Additional cost per print ($)</th>
                 </tr>
                 </thead>
@@ -34,46 +33,30 @@
                     <td><input type="number" id="filament_cost" class="form-control" min="0" value="130" required="required"></td>
                     <td><input type="number" id="power_rating" class="form-control" min="0" value="800" required="required"></td>
                     <td><input type="number" id="energy_cost" class="form-control" value="0.71" required="required" step="0.01"></td>
-                    <td><input type="number" id="failure_margin" class="form-control" min="0" max="100" value="25" required="required"></td>
                     <td><input type="number" id="additional_cost" class="form-control" min="0" step="0.1" value="0.2" required="required"></td>
                 </tr>
                 </tbody>
             </table>
 
-            <h4>ROI</h4>
+            <h4>Returns</h4>
 
             <table class="table table-borderless">
                 <thead>
                 <tr>
+                    <th>Failure margin (%)</th>
                     <th>Investment ($)</th>
                     <th>Desired time (months)</th>
                     <th>Work hours a day (h)</th>
+                    <th>Markup (%)</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
+                    <td><input type="number" id="failure_margin" class="form-control" min="0" max="100" value="25" required="required"></td>
                     <td><input type="number" id="investment" class="form-control" min="0" value="5000" required="required"></td>
                     <td><input type="number" id="desired_time" class="form-control" min="0" value="12" required="required"></td>
                     <td><input type="number" id="work_hours" class="form-control" min="0" value="12" required="required"></td>
-                </tr>
-                </tbody>
-            </table>
-
-            <h4>Other</h4>
-
-            <table class="table table-borderless">
-                <thead>
-                <tr>
-                    <th>Markup (%)</th>
-                    <th>Transaction fee (%)</th>
-                    <th>Finishing (%)</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
                     <td><input type="number" id="markup" class="form-control" min="0" max="100" value="100" required="required"></td>
-                    <td><input type="number" id="transaction_fee" class="form-control" min="0" max="100" value="4" required="required"></td>
-                    <td><input type="number" id="finishing" class="form-control" min="0" max="100" value="0" required="required"></td>
                 </tr>
                 </tbody>
             </table>
@@ -89,7 +72,7 @@
                 <tr>
                     <th>Name</th>
                     <th class="align-right">Weight (g)</th>
-                    <th class="align-right">Time (h)</th>
+                    <th class="align-right">Time (min)</th>
                     <th class="align-right">Filament Cost ($)</th>
                     <th class="align-right">Energy Cost ($)</th>
                     <th class="align-right">Additional Cost ($)</th>

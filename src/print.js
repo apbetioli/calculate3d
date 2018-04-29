@@ -3,6 +3,7 @@ export class Print {
         this.name = name;
         this.weight = 0;
         this.time = 0;
+        this.formattedTime = ''; 
         this.filamentCost = 0;
         this.energyCost = 0;
         this.additionalCost = 0;
@@ -13,19 +14,32 @@ export class Print {
         this.sellPrice = 0;
     }
 
+    add(print) {
+        this.time += print.time;
+        this.weight += print.weight;
+        this.filamentCost += print.filamentCost;
+        this.energyCost += print.energyCost;
+        this.additionalCost += print.additionalCost;
+        this.failureMargin += print.failureMargin;
+        this.totalCost += print.totalCost;
+        this.roi += print.roi;
+        this.markup += print.markup;
+        this.sellPrice += print.sellPrice;
+    }
+
     render() {
         this.fields = [
             new Text("name", this.name),
-            new Text("weight", this.weight),
-            new Text("time", this.time),
-            new Text("filament_cost", this.filamentCost),
-            new Text("energy_cost", this.energyCost),
-            new Text("additional_cost", this.additionalCost),
-            new Text("failure_margin", this.failureMargin),
-            new Text("total_cost", this.totalCost),
-            new Text("roi", this.roi),
-            new Text("markup", this.markup),
-            new Text("sell_price", this.sellPrice),
+            new Text("weight", this.weight.toFixed(2)),
+            new Text("time", this.formattedTime ? this.formattedTime: this.time),
+            new Text("filament_cost", this.filamentCost.toFixed(2)),
+            new Text("energy_cost", this.energyCost.toFixed(2)),
+            new Text("additional_cost", this.additionalCost.toFixed(2)),
+            new Text("failure_margin", this.failureMargin.toFixed(2)),
+            new Text("total_cost", this.totalCost.toFixed(2)),
+            new Text("roi", this.roi.toFixed(2)),
+            new Text("markup", this.markup.toFixed(2)),
+            new Text("sell_price", this.sellPrice.toFixed(2))
         ];
 
         let tr = document.createElement("tr");
