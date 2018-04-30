@@ -1,11 +1,11 @@
 module.exports = {
     entry: './src/main.js',
     output: {
-        path: __dirname + '/public',
+        path: __dirname,
         filename: 'bundle.js'
     },
     devServer: {
-        contentBase: __dirname + '/public'
+        contentBase: __dirname
     },
     module: {
         rules: [
