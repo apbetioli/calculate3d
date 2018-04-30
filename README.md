@@ -20,5 +20,5 @@ yarn dev
 Build the bundle.js for production
 
 ```
-yarn prod
+yarn build
 ```
