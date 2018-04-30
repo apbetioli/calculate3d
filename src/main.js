@@ -38,7 +38,7 @@ class App {
 
         let gcode = new GCode(content);
         print.weight = gcode.weight;
-        print.time = parseInt(gcode.time);
+        print.time = gcode.time;
         print.formattedTime = gcode.formattedTime;
 
         this.prints.push(print);
@@ -56,11 +56,13 @@ class App {
 
         let roi = this.calculateROI();
 
+        let filament_cost = this.parameters.getValue('filament_cost');
+
         this.prints.forEach(print => {
 
-            print.filamentCost = print.weight * this.parameters.getValue('filament_cost') / 1000;
+            print.filamentCost = print.weight * filament_cost / 1000;
             print.energyCost = print.time * this.parameters.getValue('power_rating') * this.parameters.getValue('energy_cost') / (60 * 1000);
-            print.additionalCost = parseFloat(this.parameters.getValue('additional_cost'));
+            print.additionalCost = this.parameters.getValue('additional_cost');
             print.totalCost = print.filamentCost + print.energyCost + print.additionalCost;
             print.failureMargin = print.totalCost * this.parameters.getValue('failure_margin') / 100;
             print.markup = print.totalCost * this.parameters.getValue('markup') / 100;

@@ -120,7 +120,7 @@ class GCode {
     }
 
     parseFilamentLenght(line) {
-        this.length = parseFloat(this.getValues(line)[0]);
+        this.length = this.getValues(line)[0];
     }
 
     parseFilamentUsedSlic3r(line) {
@@ -128,20 +128,20 @@ class GCode {
         let tokens = line.substring(valueIndex).trim().split(' ');
 
         if(tokens[0].endsWith('g')) {
-            this.weight = parseFloat(tokens[0].replace('g', ''));
+            this.weight = tokens[0].replace('g', '');
         } 
         else if(tokens[0].endsWith('mm')) {
-            this.length = parseFloat(tokens[0].replace('mm', ''));
-            this.volume = parseFloat(tokens[1].replace('(', '').replace('cm3)', ''));
+            this.length = tokens[0].replace('mm', '');
+            this.volume = tokens[1].replace('(', '').replace('cm3)', '');
         }
     }
 
     parseVolume(line) {
-        this.volume = parseFloat(this.getValues(line)[0]);
+        this.volume = this.getValues(line)[0];
     }
 
     parseWeight(line) {
-        this.weight = parseFloat(this.getValues(line)[0]);
+        this.weight = this.getValues(line)[0];
     }
 
     getValues(line) {

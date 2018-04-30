@@ -1,17 +1,17 @@
 export class Print {
     constructor(name = '') {
         this.name = name;
-        this.weight = 0;
+        this.weight = 0.0;
         this.time = 0;
         this.formattedTime = ''; 
-        this.filamentCost = 0;
-        this.energyCost = 0;
-        this.additionalCost = 0;
-        this.failureMargin = 0;
-        this.totalCost = 0;
-        this.roi = 0;
-        this.markup = 0;
-        this.sellPrice = 0;
+        this.filamentCost = 0.0;
+        this.energyCost = 0.0;
+        this.additionalCost = 0.0;
+        this.failureMargin = 0.0;
+        this.totalCost = 0.0;
+        this.roi = 0.0;
+        this.markup = 0.0;
+        this.sellPrice = 0.0;
     }
 
     add(print) {
@@ -30,22 +30,26 @@ export class Print {
     render() {
         this.fields = [
             new Text("name", this.name),
-            new Text("weight", this.weight.toFixed(2)),
+            new Text("weight", this.toFloat(this.weight)),
             new Text("time", this.formattedTime ? this.formattedTime: this.time),
-            new Text("filament_cost", this.filamentCost.toFixed(2)),
-            new Text("energy_cost", this.energyCost.toFixed(2)),
-            new Text("additional_cost", this.additionalCost.toFixed(2)),
-            new Text("failure_margin", this.failureMargin.toFixed(2)),
-            new Text("total_cost", this.totalCost.toFixed(2)),
-            new Text("roi", this.roi.toFixed(2)),
-            new Text("markup", this.markup.toFixed(2)),
-            new Text("sell_price", this.sellPrice.toFixed(2))
+            new Text("filament_cost",  this.toFloat(this.filamentCost)),
+            new Text("energy_cost",  this.toFloat(this.energyCost)),
+            new Text("additional_cost",  this.toFloat(this.additionalCost)),
+            new Text("total_cost",  this.toFloat(this.totalCost)),
+            new Text("failure_margin",  this.toFloat(this.failureMargin)),
+            new Text("roi",  this.toFloat(this.roi)),
+            new Text("markup",  this.toFloat(this.markup)),
+            new Text("sell_price",  this.toFloat(this.sellPrice))
         ];
 
         let tr = document.createElement("tr");
         tr.setAttribute("id", this.name);
         this.fields.forEach(field => tr.appendChild(field.render()));
         return tr;
+    }
+
+    toFloat(num) {
+        return parseFloat("" + num).toFixed(2);
     }
 
 };

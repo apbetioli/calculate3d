@@ -1,6 +1,7 @@
 export class Parameters {
     constructor() {
         this.inputs = document.querySelectorAll("#parameters input");
+        this.values = {};
         this.onChangeListeners = [];
         this.load();
         this.registerOnInputChange();
@@ -19,11 +20,13 @@ export class Parameters {
             let value = localStorage.getItem(input.getAttribute('id'));
             if(value)
                 input.value = value;
+
+            this.values[input.getAttribute('id')] = input.value;
         });
     }
 
     getValue(id) {
-        return localStorage.getItem(id);
+        return 1 * this.values[id];
     }
 
     registerOnInputChange() {
@@ -34,7 +37,11 @@ export class Parameters {
     }
 
     store() {
-        this.inputs.forEach(input => localStorage.setItem(input.getAttribute('id'), input.value));
+        this.inputs.forEach(input => {
+            let key = input.getAttribute('id');
+            this.values[key] = input.value;
+            localStorage.setItem(key, input.value);        
+        });
     }
     
 };
