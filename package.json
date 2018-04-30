@@ -19,5 +19,8 @@
         "build": "webpack --mode=production",
         "dev": "webpack-dev-server --mode=development -d",
         "postinstall": "yarn build"
+    },
+    "dependencies": {
+        "express": "^4.16.3"
     }
 }
