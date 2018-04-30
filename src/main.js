@@ -34,9 +34,9 @@ class App {
     }
 
     parseGCode(file, content) {
-        let print = new Print(file.name);
+        const print = new Print(file.name);
 
-        let gcode = new GCode(content);
+        const gcode = new GCode(content);
         print.weight = gcode.weight;
         print.time = gcode.time;
         print.formattedTime = gcode.formattedTime;
@@ -52,15 +52,12 @@ class App {
         this.printsTable.style.display = 'block';
         this.printsBody.innerHTML = "";
 
-        let total = new Print('TOTAL');
-
-        let roi = this.calculateROI();
-
-        let filament_cost = this.parameters.getValue('filament_cost');
+        const total = new Print('TOTAL');
+        const roi = this.calculateROI();
 
         this.prints.forEach(print => {
 
-            print.filamentCost = print.weight * filament_cost / 1000;
+            print.filamentCost = print.weight * this.parameters.getValue('filament_cost') / 1000;
             print.energyCost = print.time * this.parameters.getValue('power_rating') * this.parameters.getValue('energy_cost') / (60 * 1000);
             print.additionalCost = this.parameters.getValue('additional_cost');
             print.totalCost = print.filamentCost + print.energyCost + print.additionalCost;

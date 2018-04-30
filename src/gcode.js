@@ -7,7 +7,7 @@ class GCode {
         this.z0 = 0;
         this.e0 = 0;
 
-        let lines = content.split(/\r\n|\n/);
+        const lines = content.split(/\r\n|\n/);
         lines.forEach(line => {
             this.parseLine(line);
         });
@@ -39,16 +39,16 @@ class GCode {
     }
 
     parseBuildTime(line) {
-        let valueIndex = line.indexOf(':') + 1;
+        const valueIndex = line.indexOf(':') + 1;
         this.formattedTime = line.substring(valueIndex);
 
         console.log('calculated time: ' + this.time); 
         this.time = 0;
 
-        let tokens = this.getValues(line);
+        const tokens = this.getValues(line);
         for(let i = 0; i < tokens.length; i += 2) {
-            let value = parseFloat(tokens[i]);
-            let unit = tokens[i+1];
+            const value = parseInt(tokens[i]);
+            const unit = tokens[i+1];
 
             if(unit == 'hours' || unit == 'hour') {
                 this.time += value * 60;
@@ -68,8 +68,8 @@ class GCode {
         let distance = 0;
 
         for(let i = 1; i < tokens.length; i ++) {
-            let axis = tokens[i][0];
-            let value = parseInt(tokens[i].substring(1));
+            const axis = tokens[i][0];
+            const value = parseInt(tokens[i].substring(1));
             
             switch(axis) {
                 case 'E': {
@@ -86,14 +86,14 @@ class GCode {
                     break;
                 }
                 case 'Y': {
-                    let deltaY = value - this.y0;
+                    const deltaY = value - this.y0;
                     this.y0 = value;
 
                     distance = Math.sqrt(Math.pow(deltaX,2) + Math.pow(deltaY,2));
                     break;
                 }
                 case 'Z': {
-                    let deltaZ = value - this.z0;
+                    const deltaZ = value - this.z0;
                     this.z0 = value;
                     distance = deltaZ;
                     break;
@@ -104,13 +104,13 @@ class GCode {
         distance = Math.max(distance, deltaE); //In case it's only extruding
 
         if(this.speed != 0) {
-            let time = distance / this.speed;
+            const time = distance / this.speed;
             this.time += time;
         }
     }
 
     g92(line) {
-        let tokens = line.split(' ');
+        const tokens = line.split(' ');
         switch(tokens[1][0]) {
             case 'E': this.e0 = 0; break;
             case 'X': this.x0 = 0; break;
@@ -124,8 +124,8 @@ class GCode {
     }
 
     parseFilamentUsedSlic3r(line) {
-        let valueIndex = line.indexOf('=') + 1;
-        let tokens = line.substring(valueIndex).trim().split(' ');
+        const valueIndex = line.indexOf('=') + 1;
+        const tokens = line.substring(valueIndex).trim().split(' ');
 
         if(tokens[0].endsWith('g')) {
             this.weight = tokens[0].replace('g', '');
@@ -145,8 +145,8 @@ class GCode {
     }
 
     getValues(line) {
-        let valueIndex = line.indexOf(':') + 1;
-        let tokens = line.substring(valueIndex).trim().split(' ');
+        const valueIndex = line.indexOf(':') + 1;
+        const tokens = line.substring(valueIndex).trim().split(' ');
         return tokens;
     }
 };

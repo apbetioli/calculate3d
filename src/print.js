@@ -42,7 +42,7 @@ export class Print {
             new Text("sell_price",  this.toFloat(this.sellPrice))
         ];
 
-        let tr = document.createElement("tr");
+        const tr = document.createElement("tr");
         tr.setAttribute("id", this.name);
         this.fields.forEach(field => tr.appendChild(field.render()));
         return tr;
@@ -63,14 +63,14 @@ export class Input {
     }
 
     render() {
-        let input = document.createElement("input");
+        const input = document.createElement("input");
         input.setAttribute("name", this.name);
         input.setAttribute("value", this.value);
         input.setAttribute("type", this.type);
         input.setAttribute("class", 'form-control');
         input.setAttribute("step", this.step);
 
-        let td = document.createElement("td");
+        const td = document.createElement("td");
         td.appendChild(input);
 
         return td;
@@ -84,10 +84,10 @@ export class Text {
     }
 
     render() {
-        let text = document.createElement("text");
+        const text = document.createElement("text");
         text.textContent = this.value;
         
-        let td = document.createElement("td");
+        const td = document.createElement("td");
         td.appendChild(text);
 
         return td;
