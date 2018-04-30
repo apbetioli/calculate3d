@@ -3,7 +3,7 @@
 Install the dependencies. You need to have yarn preinstalled.
 
 ```
-yarn
+yarn install
 ```
 
 ## Running
