@@ -31,7 +31,7 @@ export class Print {
         this.fields = [
             new Text("name", this.name),
             new Text("weight", this.toFloat(this.weight)),
-            new Text("time", this.formattedTime ? this.formattedTime: this.time),
+            new Text("time", this.formattedTime ? this.formattedTime: this.toFloat(this.time, 0)),
             new Text("filament_cost",  this.toFloat(this.filamentCost)),
             new Text("energy_cost",  this.toFloat(this.energyCost)),
             new Text("additional_cost",  this.toFloat(this.additionalCost)),
@@ -48,8 +48,8 @@ export class Print {
         return tr;
     }
 
-    toFloat(num) {
-        return parseFloat("" + num).toFixed(2);
+    toFloat(num, digits = 2) {
+        return parseFloat("" + num).toFixed(digits);
     }
 
 };
