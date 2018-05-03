@@ -65,6 +65,9 @@ class App {
             print.markup = print.totalCost * this.parameters.getValue('markup') / 100;
             print.roi = print.time * roi;
             print.sellPrice = print.totalCost + print.failureMargin + print.roi + print.markup;
+            print.finishing = print.sellPrice * this.parameters.getValue('finishing') / 100;
+            print.transactionFee = (print.sellPrice + print.finishing) * this.parameters.getValue('transaction_fee') / 100;
+            print.finalPrice = print.sellPrice + print.finishing + print.transactionFee;
 
             total.add(print);
 

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
 
         <div id="parameters">
 
@@ -61,6 +61,23 @@
                 </tbody>
             </table>
 
+            <h4>Other</h4>
+
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th>Finishing (%)</th>
+                    <th>Transaction fee (%)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="number" id="finishing" class="form-control" min="0" max="100" value="40" required="required"></td>
+                    <td><input type="number" id="transaction_fee" class="form-control" min="0" value="3.99" step="0.01"  required="required"></td>
+                </tr>
+                </tbody>
+            </table>
+
         </div>
 
         <h3>Prints</h3>
@@ -76,11 +93,14 @@
                     <th class="align-right">Filament Cost ($)</th>
                     <th class="align-right">Energy Cost ($)</th>
                     <th class="align-right">Additional Cost ($)</th>
-                    <th class="align-right">Failure Margin ($)</th>
                     <th class="align-right">Total Cost ($)</th>
+                    <th class="align-right">Failure Margin ($)</th>                    
                     <th class="align-right">ROI ($)</th>
                     <th class="align-right">Markup ($)</th>
                     <th class="align-right">Sell price ($)</th>
+                    <th class="align-right">Finishing ($)</th>
+                    <th class="align-right">Transaction fee ($)</th>
+                    <th class="align-right">Final price ($)</th>
                 </tr>
             </thead>
             <tbody id="prints_body"></tbody>

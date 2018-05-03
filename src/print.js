@@ -2,7 +2,7 @@ export class Print {
     constructor(name = '') {
         this.name = name;
         this.weight = 0.0;
-        this.time = 0;
+        this.time = 0.0;
         this.formattedTime = ''; 
         this.filamentCost = 0.0;
         this.energyCost = 0.0;
@@ -12,6 +12,9 @@ export class Print {
         this.roi = 0.0;
         this.markup = 0.0;
         this.sellPrice = 0.0;
+        this.finalPrice = 0.0;
+        this.finishing = 0.0;
+        this.transactionFee = 0.0;
     }
 
     add(print) {
@@ -25,6 +28,9 @@ export class Print {
         this.roi += print.roi;
         this.markup += print.markup;
         this.sellPrice += print.sellPrice;
+        this.finishing += print.finishing;
+        this.transactionFee = print.transactionFee;
+        this.finalPrice += print.finalPrice;
     }
 
     render() {
@@ -39,6 +45,8 @@ export class Print {
             new Text("failure_margin",  this.toFloat(this.failureMargin)),
             new Text("roi",  this.toFloat(this.roi)),
             new Text("markup",  this.toFloat(this.markup)),
+            new Text("transaction_fee", this.toFloat(this.transactionFee)),
+            new Text("final_price", this.toFloat(this.finalPrice)),
             new Text("sell_price",  this.toFloat(this.sellPrice))
         ];
 
