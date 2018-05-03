@@ -45,9 +45,10 @@ export class Print {
             new Text("failure_margin",  this.toFloat(this.failureMargin)),
             new Text("roi",  this.toFloat(this.roi)),
             new Text("markup",  this.toFloat(this.markup)),
-            new Text("transaction_fee", this.toFloat(this.transactionFee)),
-            new Text("final_price", this.toFloat(this.finalPrice)),
-            new Text("sell_price",  this.toFloat(this.sellPrice))
+            new Text("sell_price",  this.toFloat(this.sellPrice)),
+            new Text("transaction_fee", this.toFloat(this.finishing)),
+            new Text("transaction_fee", this.toFloat(this.transactionFee)),            
+            new Text("final_price", this.toFloat(this.finalPrice))
         ];
 
         const tr = document.createElement("tr");
