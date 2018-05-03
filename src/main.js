@@ -54,6 +54,8 @@ class App {
 
         const total = new Print('TOTAL');
         const roi = this.calculateROI();
+        const shipping = this.parameters.getValue('shipping');
+        const transactionFee =this.parameters.getValue('transaction_fee');
 
         this.prints.forEach(print => {
 
@@ -66,8 +68,9 @@ class App {
             print.roi = print.time * roi;
             print.sellPrice = print.totalCost + print.failureMargin + print.roi + print.markup;
             print.finishing = print.sellPrice * this.parameters.getValue('finishing') / 100;
-            print.transactionFee = (print.sellPrice + print.finishing) * this.parameters.getValue('transaction_fee') / 100;
+            print.transactionFee = (print.sellPrice + print.finishing) * transactionFee / 100;
             print.finalPrice = print.sellPrice + print.finishing + print.transactionFee;
+            print.shipping = shipping + (shipping * transactionFee / 100);
 
             total.add(print);
 

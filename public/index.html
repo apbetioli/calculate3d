@@ -68,12 +68,14 @@
                 <tr>
                     <th>Finishing (%)</th>
                     <th>Transaction fee (%)</th>
+                    <th>Shipping ($)</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td><input type="number" id="finishing" class="form-control" min="0" max="100" value="40" required="required"></td>
                     <td><input type="number" id="transaction_fee" class="form-control" min="0" value="3.99" step="0.01"  required="required"></td>
+                    <td><input type="number" id="shipping" class="form-control" min="0" max="100" value="0" step="0.01" required="required"></td>
                 </tr>
                 </tbody>
             </table>
@@ -101,6 +103,7 @@
                     <th class="align-right">Finishing ($)</th>
                     <th class="align-right">Transaction fee ($)</th>
                     <th class="align-right">Final price ($)</th>
+                    <th class="align-right">Shipping ($)</th>
                 </tr>
             </thead>
             <tbody id="prints_body"></tbody>

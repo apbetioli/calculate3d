@@ -12,9 +12,10 @@ export class Print {
         this.roi = 0.0;
         this.markup = 0.0;
         this.sellPrice = 0.0;
-        this.finalPrice = 0.0;
         this.finishing = 0.0;
         this.transactionFee = 0.0;
+        this.finalPrice = 0.0;
+        this.shipping = 0.0;
     }
 
     add(print) {
@@ -31,6 +32,7 @@ export class Print {
         this.finishing += print.finishing;
         this.transactionFee = print.transactionFee;
         this.finalPrice += print.finalPrice;
+        this.shipping = print.shipping;
     }
 
     render() {
@@ -46,9 +48,10 @@ export class Print {
             new Text("roi",  this.toFloat(this.roi)),
             new Text("markup",  this.toFloat(this.markup)),
             new Text("sell_price",  this.toFloat(this.sellPrice)),
-            new Text("transaction_fee", this.toFloat(this.finishing)),
+            new Text("finishing", this.toFloat(this.finishing)),
             new Text("transaction_fee", this.toFloat(this.transactionFee)),            
-            new Text("final_price", this.toFloat(this.finalPrice))
+            new Text("final_price", this.toFloat(this.finalPrice)),
+            new Text("shipping", this.toFloat(this.shipping))
         ];
 
         const tr = document.createElement("tr");
