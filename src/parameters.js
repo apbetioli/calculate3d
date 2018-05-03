@@ -17,7 +17,7 @@ export class Parameters {
 
     load() {
         this.inputs.forEach(input => {
-            let value = localStorage.getItem(input.getAttribute('id'));
+            const value = localStorage.getItem(input.getAttribute('id'));
             if(value)
                 input.value = value;
 
@@ -38,7 +38,7 @@ export class Parameters {
 
     store() {
         this.inputs.forEach(input => {
-            let key = input.getAttribute('id');
+            const key = input.getAttribute('id');
             this.values[key] = input.value;
             localStorage.setItem(key, input.value);        
         });

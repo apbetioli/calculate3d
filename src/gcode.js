@@ -62,7 +62,7 @@ class GCode {
     }
 
     g1(line) {
-        let tokens = line.split(' ');
+        const tokens = line.split(' ');
         let deltaE = 0;
         let deltaX = 0;
         let distance = 0;
